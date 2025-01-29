@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas del Personaje</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Estadísticas del Personaje</h1>
+        <div class="stats">
+            <div class="stat">
+                <label for="fuerza">Fuerza:</label>
+                <input type="number" id="fuerza" value="10">
+            </div>
+            <div class="stat">
+                <label for="destreza">Destreza:</label>
+                <input type="number" id="destreza" value="10">
+            </div>
+            <div class="stat">
+                <label for="fortaleza">Fortaleza:</label>
+                <input type="number" id="fortaleza" value="10">
+            </div>
+            <div class="stat">
+                <label for="inteligencia">Inteligencia:</label>
+                <input type="number" id="inteligencia" value="10">
+            </div>
+            <div class="stat">
+                <label for="conciencia">Conciencia:</label>
+                <input type="number" id="conciencia" value="10">
+            </div>
+            <div class="stat">
+                <label for="carisma">Carisma:</label>
+                <input type="number" id="carisma" value="10">
+            </div>
+        </div>
+        <button onclick="calcularModificadores()">Calcular Modificadores</button>
+        <div id="modificadores"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
