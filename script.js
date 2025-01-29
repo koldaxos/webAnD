@@ -34,7 +34,7 @@ function mostrarInformacion() {
 }
 
 function descargarWord() {
-    // Obtener el contenido de la caja
+   // Obtener el contenido de la caja
     const contenido = document.getElementById('resultado').innerHTML;
 
     // Convertir el contenido HTML a un archivo Word
@@ -42,7 +42,7 @@ function descargarWord() {
 
     // Crear un enlace para descargar el archivo
     const link = document.createElement('a');
-    link.href = URL.createObjectURL(converted);
+    link.href = URL.createObjectURL(contenido);
     link.download = 'informacion_personaje.docx';
     link.click();
     URL.revokeObjectURL(link.href);
