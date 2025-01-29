@@ -1,6 +1,3 @@
-// Inicializar jsPDF
-const { jsPDF } = window.jspdf;
-
 function mostrarInformacion() {
     // Obtener valores de los campos adicionales
     const name = document.getElementById('name').value;
@@ -36,44 +33,17 @@ function mostrarInformacion() {
 
 function descargarPDF() {
     // Obtener el contenido de la caja
-    const name = document.getElementById('name').value;
-    const size = document.getElementById('size').value;
-    const type = document.getElementById('type').value;
-    const tag = document.getElementById('tag').value;
-    const alignment = document.getElementById('alignment').value;
+    const elemento = document.getElementById('resultado');
 
-    const stats = ['fuerza', 'destreza', 'fortaleza', 'inteligencia', 'conciencia', 'carisma'];
-    let statsContent = '';
+    // Configurar las opciones de html2pdf
+    const opciones = {
+        margin: 10,
+        filename: 'informacion_personaje.pdf',
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: { scale: 2 },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+    };
 
-    stats.forEach(stat => {
-        const valor = parseInt(document.getElementById(stat).value);
-        const modificador = Math.floor((valor - 10) / 2);
-        statsContent += `${stat.charAt(0).toUpperCase() + stat.slice(1)}: ${valor} (${modificador >= 0 ? '+' : ''}${modificador})\n`;
-    });
-
-    // Crear un nuevo documento PDF
-    const doc = new jsPDF();
-
-    // Configurar el estilo del PDF
-    doc.setFont('helvetica'); // Usar una fuente similar a Arial
-    doc.setFontSize(12);
-
-    // Añadir el contenido al PDF
-    doc.setFontSize(16);
-    doc.text(name, 15, 20); // Nombre del personaje
-
-    doc.setFontSize(12);
-    doc.text(`Size: ${size}`, 15, 30);
-    doc.text(`Type: ${type}`, 15, 40);
-    doc.text(`Tag: ${tag}`, 15, 50);
-    doc.text(`Alignment: ${alignment}`, 15, 60);
-
-    doc.setFontSize(14);
-    doc.text('Estadísticas:', 15, 80);
-
-    doc.setFontSize(12);
-    doc.text(statsContent, 15, 90);
-
-    // Descargar el PDF
-    doc.save('informacion_personaje.pdf');
+    // Generar el PDF
+    html2pdf().from(elemento).set(opciones).save();
 }
