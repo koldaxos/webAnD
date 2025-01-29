@@ -68,4 +68,14 @@ function descargarPDF() {
 
     doc.setFontSize(12);
     let y = 90;
-    const stats = ['fuerza', 'destreza', 'fortaleza', 'inteligencia', 'conciencia', 'car
+    const stats = ['fuerza', 'destreza', 'fortaleza', 'inteligencia', 'conciencia', 'carisma'];
+    stats.forEach(stat => {
+        const valor = parseInt(document.getElementById(stat).value);
+        const modificador = Math.floor((valor - 10) / 2);
+        doc.text(`${stat.charAt(0).toUpperCase() + stat.slice(1)}: ${modificador}`, 15, y);
+        y += 10;
+    });
+
+    // Descargar el PDF
+    doc.save('informacion_personaje.pdf');
+}
