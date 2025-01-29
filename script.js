@@ -32,7 +32,7 @@ function mostrarInformacion() {
 }
 
 function descargarWord() {
-   // Obtener el contenido de la caja
+    // Obtener el contenido de la caja
     const contenido = document.getElementById('resultado').innerHTML;
 
     // Convertir el contenido HTML a un archivo Word
