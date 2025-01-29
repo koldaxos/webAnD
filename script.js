@@ -1,3 +1,6 @@
+// Inicializar jsPDF
+const { jsPDF } = window.jspdf;
+
 function mostrarInformacion() {
     // Obtener valores de los campos adicionales
     const name = document.getElementById('name').value;
@@ -31,19 +34,46 @@ function mostrarInformacion() {
     document.getElementById('descargarBtn').style.display = 'block';
 }
 
-function descargarWord() {
+function descargarPDF() {
     // Obtener el contenido de la caja
-    const contenido = document.getElementById('resultado').innerHTML;
+    const name = document.getElementById('name').value;
+    const size = document.getElementById('size').value;
+    const type = document.getElementById('type').value;
+    const tag = document.getElementById('tag').value;
+    const alignment = document.getElementById('alignment').value;
 
-    // Convertir el contenido HTML a un archivo Word
-    const converted = htmlDocx.asBlob(contenido);
+    const stats = ['fuerza', 'destreza', 'fortaleza', 'inteligencia', 'conciencia', 'carisma'];
+    let statsContent = '';
 
-    // Crear un enlace para descargar el archivo
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(converted);
-    link.download = 'informacion_personaje.docx';
-    document.body.appendChild(link); // Añadir el enlace al DOM
-    link.click(); // Simular el clic en el enlace
-    document.body.removeChild(link); // Eliminar el enlace del DOM
-    URL.revokeObjectURL(link.href); // Liberar el objeto URL
+    stats.forEach(stat => {
+        const valor = parseInt(document.getElementById(stat).value);
+        const modificador = Math.floor((valor - 10) / 2);
+        statsContent += `${stat.charAt(0).toUpperCase() + stat.slice(1)}: ${valor} (${modificador >= 0 ? '+' : ''}${modificador})\n`;
+    });
+
+    // Crear un nuevo documento PDF
+    const doc = new jsPDF();
+
+    // Configurar el estilo del PDF
+    doc.setFont('helvetica'); // Usar una fuente similar a Arial
+    doc.setFontSize(12);
+
+    // Añadir el contenido al PDF
+    doc.setFontSize(16);
+    doc.text(name, 15, 20); // Nombre del personaje
+
+    doc.setFontSize(12);
+    doc.text(`Size: ${size}`, 15, 30);
+    doc.text(`Type: ${type}`, 15, 40);
+    doc.text(`Tag: ${tag}`, 15, 50);
+    doc.text(`Alignment: ${alignment}`, 15, 60);
+
+    doc.setFontSize(14);
+    doc.text('Estadísticas:', 15, 80);
+
+    doc.setFontSize(12);
+    doc.text(statsContent, 15, 90);
+
+    // Descargar el PDF
+    doc.save('informacion_personaje.pdf');
 }
