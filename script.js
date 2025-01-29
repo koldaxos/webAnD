@@ -1,6 +1,3 @@
-// Inicializar jsPDF
-const { jsPDF } = window.jspdf;
-
 function mostrarInformacion() {
     // Obtener valores de los campos adicionales
     const name = document.getElementById('name').value;
@@ -36,46 +33,17 @@ function mostrarInformacion() {
     document.getElementById('descargarBtn').style.display = 'block';
 }
 
-function descargarPDF() {
-    const contenido = document.getElementById('resultado').innerText;
+function descargarWord() {
+    // Obtener el contenido de la caja
+    const contenido = document.getElementById('resultado').innerHTML;
 
-    // Crear un nuevo documento PDF
-    const doc = new jsPDF();
+    // Convertir el contenido HTML a un archivo Word
+    const converted = htmlDocx.asBlob(contenido);
 
-    // Configurar el estilo del PDF
-    doc.setFont('helvetica'); // Usar una fuente similar a Arial
-    doc.setFontSize(12);
-
-    // Añadir un fondo y un borde similar a la caja
-    doc.setFillColor(249, 249, 249); // Color de fondo (#f9f9f9)
-    doc.rect(5, 5, 200, 280, 'F'); // Rectángulo de fondo
-    doc.setDrawColor(221, 221, 221); // Color del borde (#ddd)
-    doc.rect(5, 5, 200, 280); // Rectángulo del borde
-
-    // Añadir el contenido al PDF
-    doc.setTextColor(51, 51, 51); // Color del texto (#333)
-    doc.setFontSize(16);
-    doc.text(document.getElementById('name').value, 15, 20); // Nombre del personaje
-
-    doc.setFontSize(12);
-    doc.text(`Size: ${document.getElementById('size').value}`, 15, 30);
-    doc.text(`Type: ${document.getElementById('type').value}`, 15, 40);
-    doc.text(`Tag: ${document.getElementById('tag').value}`, 15, 50);
-    doc.text(`Alignment: ${document.getElementById('alignment').value}`, 15, 60);
-
-    doc.setFontSize(14);
-    doc.text('Estadísticas:', 15, 80);
-
-    doc.setFontSize(12);
-    let y = 90;
-    const stats = ['fuerza', 'destreza', 'fortaleza', 'inteligencia', 'conciencia', 'carisma'];
-    stats.forEach(stat => {
-        const valor = parseInt(document.getElementById(stat).value);
-        const modificador = Math.floor((valor - 10) / 2);
-        doc.text(`${stat.charAt(0).toUpperCase() + stat.slice(1)}: ${modificador}`, 15, y);
-        y += 10;
-    });
-
-    // Descargar el PDF
-    doc.save('informacion_personaje.pdf');
+    // Crear un enlace para descargar el archivo
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(converted);
+    link.download = 'informacion_personaje.docx';
+    link.click();
+    URL.revokeObjectURL(link.href);
 }
