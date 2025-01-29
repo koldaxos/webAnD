@@ -40,8 +40,10 @@ function descargarWord() {
 
     // Crear un enlace para descargar el archivo
     const link = document.createElement('a');
-    link.href = URL.createObjectURL(contenido);
+    link.href = URL.createObjectURL(converted);
     link.download = 'informacion_personaje.docx';
-    link.click();
-    URL.revokeObjectURL(link.href);
+    document.body.appendChild(link); // Añadir el enlace al DOM
+    link.click(); // Simular el clic en el enlace
+    document.body.removeChild(link); // Eliminar el enlace del DOM
+    URL.revokeObjectURL(link.href); // Liberar el objeto URL
 }
