@@ -1,3 +1,6 @@
+// Inicializar jsPDF
+const { jsPDF } = window.jspdf;
+
 function mostrarInformacion() {
     // Obtener valores de los campos adicionales
     const name = document.getElementById('name').value;
@@ -33,13 +36,16 @@ function mostrarInformacion() {
     document.getElementById('descargarBtn').style.display = 'block';
 }
 
-function descargarInformacion() {
+function descargarPDF() {
     const contenido = document.getElementById('resultado').innerText;
-    const blob = new Blob([contenido], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'informacion_personaje.txt';
-    a.click();
-    URL.revokeObjectURL(url);
+
+    // Crear un nuevo documento PDF
+    const doc = new jsPDF();
+
+    // Añadir el contenido al PDF
+    doc.setFontSize(12);
+    doc.text(contenido, 10, 10);
+
+    // Descargar el PDF
+    doc.save('informacion_personaje.pdf');
 }
