@@ -16,18 +16,30 @@ function mostrarInformacion() {
         modificadores[stat] = modificador;
     });
 
-    // Mostrar la información
-    let resultado = '<h2>Información del Personaje:</h2>';
-    resultado += `<p><strong>Name:</strong> ${name}</p>`;
+    // Mostrar la información en la caja de resultado
+    let resultado = `<h2>${name}</h2>`;
     resultado += `<p><strong>Size:</strong> ${size}</p>`;
     resultado += `<p><strong>Type:</strong> ${type}</p>`;
     resultado += `<p><strong>Tag:</strong> ${tag}</p>`;
     resultado += `<p><strong>Alignment:</strong> ${alignment}</p>`;
 
-    resultado += '<h2>Modificadores:</h2>';
+    resultado += '<h2>Estadísticas:</h2>';
     for (const [stat, mod] of Object.entries(modificadores)) {
         resultado += `<p>${stat.charAt(0).toUpperCase() + stat.slice(1)}: ${mod}</p>`;
     }
 
     document.getElementById('resultado').innerHTML = resultado;
+    document.getElementById('resultado').style.display = 'block';
+    document.getElementById('descargarBtn').style.display = 'block';
+}
+
+function descargarInformacion() {
+    const contenido = document.getElementById('resultado').innerText;
+    const blob = new Blob([contenido], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'informacion_personaje.txt';
+    a.click();
+    URL.revokeObjectURL(url);
 }
