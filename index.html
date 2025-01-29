@@ -9,6 +9,32 @@
 <body>
     <div class="container">
         <h1>Estadísticas del Personaje</h1>
+        
+        <!-- Campos adicionales -->
+        <div class="info">
+            <div class="field">
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Enter name">
+            </div>
+            <div class="field">
+                <label for="size">Size:</label>
+                <input type="text" id="size" placeholder="Enter size">
+            </div>
+            <div class="field">
+                <label for="type">Type:</label>
+                <input type="text" id="type" placeholder="Enter type">
+            </div>
+            <div class="field">
+                <label for="tag">Tag:</label>
+                <input type="text" id="tag" placeholder="Enter tag">
+            </div>
+            <div class="field">
+                <label for="alignment">Alignment:</label>
+                <input type="text" id="alignment" placeholder="Enter alignment">
+            </div>
+        </div>
+
+        <!-- Estadísticas -->
         <div class="stats">
             <div class="stat">
                 <label for="fuerza">Fuerza:</label>
@@ -35,8 +61,10 @@
                 <input type="number" id="carisma" value="10">
             </div>
         </div>
-        <button onclick="calcularModificadores()">Calcular Modificadores</button>
-        <div id="modificadores"></div>
+
+        <!-- Botón y resultados -->
+        <button onclick="mostrarInformacion()">Mostrar Información</button>
+        <div id="resultado"></div>
     </div>
     <script src="script.js"></script>
 </body>
