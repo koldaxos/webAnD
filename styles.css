@@ -18,22 +18,23 @@ h1 {
     text-align: center;
 }
 
-.stats {
+.info, .stats {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
-.stat {
+.field, .stat {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-input {
-    width: 60px;
+input[type="text"], input[type="number"] {
+    width: 60%;
     padding: 5px;
-    text-align: center;
+    text-align: left;
 }
 
 button {
@@ -50,7 +51,7 @@ button:hover {
     background-color: #218838;
 }
 
-#modificadores {
+#resultado {
     margin-top: 20px;
     text-align: center;
 }
