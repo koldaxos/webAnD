@@ -8,12 +8,12 @@ function mostrarInformacion() {
 
     // Obtener valores de las estadísticas
     const stats = ['fuerza', 'destreza', 'fortaleza', 'inteligencia', 'conciencia', 'carisma'];
-    let modificadores = {};
+    let resultadoStats = '';
 
     stats.forEach(stat => {
         const valor = parseInt(document.getElementById(stat).value);
         const modificador = Math.floor((valor - 10) / 2);
-        modificadores[stat] = modificador;
+        resultadoStats += `<p><strong>${stat.charAt(0).toUpperCase() + stat.slice(1)}:</strong> ${valor} (${modificador >= 0 ? '+' : ''}${modificador})</p>`;
     });
 
     // Mostrar la información en la caja de resultado
@@ -24,9 +24,7 @@ function mostrarInformacion() {
     resultado += `<p><strong>Alignment:</strong> ${alignment}</p>`;
 
     resultado += '<h2>Estadísticas:</h2>';
-    for (const [stat, mod] of Object.entries(modificadores)) {
-        resultado += `<p>${stat.charAt(0).toUpperCase() + stat.slice(1)}: ${mod}</p>`;
-    }
+    resultado += resultadoStats;
 
     document.getElementById('resultado').innerHTML = resultado;
     document.getElementById('resultado').style.display = 'block';
