@@ -32,18 +32,24 @@ function mostrarInformacion() {
 }
 
 function descargarPDF() {
-    // Obtener el contenido de la caja
-    const elemento = document.getElementById('resultado');
+    // Asegurarse de que la caja esté visible
+    document.getElementById('resultado').style.display = 'block';
 
-    // Configurar las opciones de html2pdf
-    const opciones = {
-        margin: 10,
-        filename: 'informacion_personaje.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
+    // Esperar 500 ms para asegurar la renderización
+    setTimeout(() => {
+        // Obtener el contenido de la caja
+        const elemento = document.getElementById('resultado');
 
-    // Generar el PDF
-    html2pdf().from(elemento).set(opciones).save();
+        // Configurar las opciones de html2pdf
+        const opciones = {
+            margin: 10,
+            filename: 'informacion_personaje.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { scale: 2, logging: true, useCORS: true },
+            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+        };
+
+        // Generar el PDF
+        html2pdf().from(elemento).set(opciones).save();
+    }, 500); // Esperar 500 ms
 }
