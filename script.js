@@ -10,7 +10,7 @@ function mostrarInformacion() {
     const alignment = document.getElementById('alignment').value;
 
     // Obtener valores de las estadísticas
-    const stats = ['fuerza', 'destreza', 'fortaleza', 'inteligencia', 'conciencia', 'carisma'];
+    const stats = ['fuerza', 'destreza', 'fortaleza', 'inteligencia', 'conciencia', 'carisma', 'arcana', 'fe', 'voluntad'];
     let resultadoStats = '';
 
     stats.forEach(stat => {
