@@ -51,7 +51,18 @@ button:hover {
     background-color: #218838;
 }
 
-#resultado {
+.resultado-box {
     margin-top: 20px;
-    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    display: none;
+}
+
+#descargarBtn {
+    background-color: #007bff;
+}
+
+#descargarBtn:hover {
+    background-color: #0056b3;
 }
